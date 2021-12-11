@@ -29,7 +29,7 @@ startBtn.addEventListener('click', onBtnClick);
 function onBtnClick() {
     timer.start();
     startBtn.disabled = true;
-    
+       
 };
 
 function convertMs(ms) {
@@ -62,16 +62,20 @@ function updateData({days, hours, minutes, seconds}) {
     clockface.seconds.textContent = seconds;    
 }
 
-const timer = {
+const timer = {    
     start() {
+            
         setInterval(() => {
             const endTime = fp.selectedDates[0];
             const currentTime = Date.now();
-            const deltaTime = endTime-currentTime;
-            const convertedTime = convertMs(deltaTime);
+            const deltaTime = endTime-currentTime;            
+        if (deltaTime<=0) {
+            return;
+        }
+            const convertedTime = convertMs(deltaTime);    
             updateData(convertedTime);
         }, 1000);
-    }
+    },
 }
 
 
